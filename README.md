@@ -1,1 +1,3 @@
-# patatrack-docker
+# Experimenting docker image creation of Patatrack CMSSW releases
+
+
