@@ -21,5 +21,15 @@ RUN     /opt/cms/common/cmspkg -a $SCRAM_ARCH clean
 USER    root
 RUN     /bin/cp -f /opt/cms/cmsset_default.sh  /etc/profile.d/
 RUN     /bin/cp -f /opt/cms/cmsset_default.csh /etc/profile.d/
+RUN     mkdir /opt/shifter
 USER    cmsbld
 
+USER cmsinst
+RUN    ln -s /cvmfs/cms.cern.ch/SITECONF /opt/cms/SITECONF
+USER cmsbld
+
+ENV NVIDIA_REQUIRE_CUDA "cuda>=10.0"
+ENV NVIDIA_VISIBLE_DEVICES "all"
+ENV NVIDIA_DRIVER_CAPABILITIES "compute,utility"
+ENV PATH "/opt/shifter/bin:$PATH"
+ENV LD_LIBRARY_PATH "/opt/shifter/lib"
